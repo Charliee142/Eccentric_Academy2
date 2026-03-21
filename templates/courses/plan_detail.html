@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}{{ plan.name }} Courses – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-section" style="min-height:100vh;">
+    <div class="container">
+        <!-- Plan Header -->
+        <div class="row align-items-center mb-5 g-4">
+            <div class="col-lg-7">
+                <p class="ea-section-tag">{{ plan.get_tier_display }} Tier</p>
+                <h1 class="ea-section-title">{{ plan.name }}</h1>
+                <p class="text-white mb-4">{{ plan.description }}</p>
+                {% if not is_enrolled %}
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'payments:checkout' plan.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-ea-primary btn-lg">
+                            <i class="bi bi-lock-fill me-2"></i>Enroll – {{ plan.price_formatted }}
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-ea-primary btn-lg">
+                        <i class="bi bi-rocket-takeoff me-2"></i>Get Started – {{ plan.price_formatted }}
+                    </a>
+                    {% endif %}
+                {% else %}
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge py-2 px-3" style="background:rgba(0,229,160,0.15);color:#00e5a0;border:1px solid rgba(0,229,160,0.3);font-size:0.85rem;">
+                        <i class="bi bi-check-circle-fill me-2"></i>Enrolled
+                    </span>
+                    <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-accent">Go to Dashboard</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-5">
+                <div class="ea-plan-card" style="transform:none;">
+                    <div class="row text-center g-3">
+                        <div class="col-4">
+                            <div class="ea-hero-stat-value">{{ courses.count }}</div>
+                            <div class="ea-hero-stat-label">Courses</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="ea-hero-stat-value">{{ plan.price_formatted }}</div>
+                            <div class="ea-hero-stat-label">One-time</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="ea-hero-stat-value"><i class="bi bi-infinity" style="font-size:1.5rem;"></i></div>
+                            <div class="ea-hero-stat-label">Access</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <h4 class="text-white mb-4">Courses Included ({{ courses.count }})</h4>
+        <div class="row g-4">
+            {% for course in courses %}
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-course-card">
+                    <div class="ea-course-thumb">
+                        <i class="bi bi-shield-shaded" style="opacity:0.3;position:relative;z-index:1;"></i>
+                    </div>
+                    <div class="ea-course-body">
+                        {% if course.category %}
+                        <div class="ea-course-category">{{ course.category.name }}</div>
+                        {% endif %}
+                        <div class="ea-course-title">{{ course.title }}</div>
+                        <p class="text-white small mb-3">{{ course.short_description }}</p>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="badge badge-{{ course.difficulty }}" style="font-size:0.7rem;">
+                                {{ course.get_difficulty_display }}
+                            </span>
+                            <small class="text-white"><i class="bi bi-clock me-1"></i>{{ course.duration_hours }}h</small>
+                        </div>
+                        {% if is_enrolled %}
+                        <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-ea-primary btn-sm w-100 mt-3">
+                            <i class="bi bi-play-fill me-1"></i>Start Learning
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,575 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Eccentric Academy – Nigeria's Premier Ethical Hacking & Web Development School{% endblock %}
+
+{% block content %}
+
+<!-- ============ HERO ============ -->
+<section class="ea-hero">
+    <div class="ea-hero-grid"></div>
+    <div class="ea-hero-orb-1"></div>
+    <div class="ea-hero-orb-2"></div>
+
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="ea-hero-tag">
+                    <span class="dot"></span>
+                    Nigeria's #1 Cybersecurity Academy
+                </div>
+                <h1>
+                    Modern Problems<br>
+                    Deserve <span class="highlight">Modern</span><br>
+                    Solutions.
+                </h1>
+                <p class="lead">
+                    We offer <strong style="color:white;">Ethical Hacking, Programming &amp; Cybersecurity Services</strong> — taught in plain Naija English, from absolute zero, with real projects you can show anyone.
+                </p>
+                <div class="ea-hero-cta d-flex flex-wrap gap-3 mt-4">
+                    <a href="{% url 'courses:pricing' %}" class="btn btn-ea-primary btn-lg">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i>Enroll Now
+                    </a>
+                    <a href="{% static 'downloads/Eccentric_Academy_Full_Brochure.pdf' %}"
+                       download="Eccentric_Academy_Full_Brochure.pdf"
+                       class="btn btn-outline-accent btn-lg">
+                        <i class="bi bi-file-earmark-pdf-fill me-2"></i>Download Brochure
+                    </a>
+                </div>
+
+                <div class="ea-hero-stats">
+                    <div>
+                        <div class="ea-hero-stat-value">3</div>
+                        <div class="ea-hero-stat-label">Programmes</div>
+                    </div>
+                    <div>
+                        <div class="ea-hero-stat-value">11</div>
+                        <div class="ea-hero-stat-label">Phases</div>
+                    </div>
+                    <div>
+                        <div class="ea-hero-stat-value">8+</div>
+                        <div class="ea-hero-stat-label">Real Projects</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="ea-terminal-card">
+                    <div class="ea-terminal-bar">
+                        <span class="terminal-dot" style="background:#ff5f56"></span>
+                        <span class="terminal-dot" style="background:#ffbd2e"></span>
+                        <span class="terminal-dot" style="background:#27c93f"></span>
+                        <span class="ms-3 text-muted" style="font-family:'Space Mono',monospace;font-size:0.75rem;">eccentric@academy ~ %</span>
+                    </div>
+                    <div class="ea-terminal-body" id="ea-terminal">
+                        <div class="ea-terminal-cmd">$ whoami</div>
+                        <div class="ea-terminal-success">eccentric_student@cybersecurity-ng</div>
+                        <div class="ea-terminal-cmd" style="margin-top:0.5rem;">$ ls programmes/</div>
+                        <div class="ea-terminal-output">cybersecurity_beginner/  cisco_intro/  django_webdev/</div>
+                        <div class="ea-terminal-cmd" style="margin-top:0.5rem;">$ cat enrollment.status</div>
+                        <div class="ea-terminal-success">[✓] Plan: Advanced – ACTIVE</div>
+                        <div class="ea-terminal-success">[✓] Payment verified via Paystack NGN</div>
+                        <div class="ea-terminal-success">[✓] WhatsApp group: JOINED</div>
+                        <div class="ea-terminal-line" style="margin-top:0.5rem;">$ <span class="cursor-blink"></span></div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3 mt-3 justify-content-center flex-wrap">
+                    <a href="https://wa.me/2349136823282" target="_blank" class="ea-contact-pill">
+                        <i class="bi bi-whatsapp text-success me-2"></i>+234 9136823282
+                    </a>
+                    <a href="https://wa.me/2349035505885" target="_blank" class="ea-contact-pill">
+                        <i class="bi bi-whatsapp text-success me-2"></i>+234 9035505885
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ABOUT US ============ -->
+<section class="ea-section ea-section-dark" id="about">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <p class="ea-section-tag">About Us</p>
+                <h2 class="ea-section-title">A Modern Tech Brand<br>Built for Nigeria</h2>
+                <p class="text-white mb-4" style="font-size:1.05rem;line-height:1.8;">
+                    Eccentric Academy is a modern tech brand dedicated to helping students learn in-demand tech skills and helping businesses stay secure, visible, and protected.
+                </p>
+                <p class="text-white mb-4" style="line-height:1.8;">
+                    We combine <strong style="color:white;">Ethical Hacking, Web Development, and Cybersecurity</strong> to empower people with knowledge and protect companies from digital threats.
+                </p>
+                <div class="ea-promise-box">
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> Taught in relatable Naija English — like chatting with a friend</span></div>
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> Real examples: GTBank, MTN, JAMB, WhatsApp</span></div>
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> No one will laugh at your questions — ever. Ask freely</span></div>
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> Online classes via Zoom/WhatsApp + recordings forever</span></div>
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> Active WhatsApp support group — answers 24/7</span></div>
+                    <div class="ea-promise-item"><i class="bi bi-check-circle-fill text-accent"></i><span> Instructor has real deployed projects — proof it works</span></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="ea-feature-card">
+                            <h5 class="text-white mb-3"><i class="bi bi-gear-wide-connected text-accent me-2"></i>Our Services</h5>
+                            <div class="row g-2">
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Penetration Testing</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Web & Software Development</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Ethical Hacking Training</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Tech Consulting</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Staff Cyber Awareness Training</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="ea-feature-card">
+                            <h5 class="text-white mb-3"><i class="bi bi-people-fill text-accent me-2"></i>Who We Serve</h5>
+                            <div class="row g-2">
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Businesses that want to stay secure</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Students who want a tech career</span></div></div>
+                                <div class="col-12"><div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check text-accent"></i><span class="text-white small">Creators building apps & ideas</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ MESSAGE TO YOU ============ -->
+<section class="ea-section" style="background:var(--ea-dark);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="ea-message-card">
+                    <div class="ea-message-quote"><i class="bi bi-chat-quote-fill"></i></div>
+                    <p class="ea-section-tag text-center">A Message Just For You</p>
+                    <h3 class="text-white text-center mb-4">Read This Before Anything Else — It Matters</h3>
+                    <p class="text-white text-center mb-4" style="font-size:1.05rem;line-height:1.9;">
+                        You do <strong style="color:white;">NOT</strong> need to be a tech person to start this journey. A lot of people see "ethical hacking" and immediately think — <em style="color:var(--ea-accent);">that one is not for me.</em>
+                    </p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="ea-analogy-box">
+                                <i class="bi bi-phone-fill text-accent d-block mb-2" style="font-size:1.5rem;"></i>
+                                <p class="text-white small mb-0">Before you learned WhatsApp, did you know anything about smartphones? <strong style="color:white;">No. You learned. And now it's normal.</strong></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ea-analogy-box">
+                                <i class="bi bi-car-front-fill text-accent d-block mb-2" style="font-size:1.5rem;"></i>
+                                <p class="text-white small mb-0">Before you learned to drive, did you know anything about engines? <strong style="color:white;">No. You learned. That is exactly what happens here.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-white text-center" style="font-size:1.05rem;line-height:1.9;">
+                        We start from <strong style="color:var(--ea-accent);">absolute ZERO</strong>. Plain everyday language. No jargon. By the time you finish, you will be doing things that <strong style="color:white;">shock your friends and family. 😄</strong>
+                    </p>
+                    <div class="text-center mt-4">
+                        <a href="{% url 'account_signup' %}" class="btn btn-ea-primary btn-lg me-3">Join Today</a>
+                        <a href="{% static 'downloads/Eccentric_Academy_Full_Brochure.pdf' %}" download class="btn btn-outline-accent btn-lg">
+                            <i class="bi bi-download me-2"></i>Full Brochure
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ 3 PROGRAMMES ============ -->
+<section class="ea-section ea-section-dark" id="programmes">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="ea-section-tag">Curriculum Overview</p>
+            <h2 class="ea-section-title">3 Programmes. One Complete Journey.</h2>
+            <p class="text-white">The academy is divided into 3 programmes. Each builds on the last.</p>
+        </div>
+        <div class="row g-4">
+            <!-- Programme 1 -->
+            <div class="col-lg-4">
+                <div class="ea-programme-card prog-beginner h-100">
+                    <div class="ea-prog-number">01</div>
+                    <div class="ea-prog-icon"><i class="bi bi-seedling-fill"></i></div>
+                    <h4 class="text-white mt-3 mb-2">Cybersecurity for Complete Beginners</h4>
+                    <p class="text-accent small fw-600 mb-3">Zero to Ethical Hacker — 11 Phases</p>
+                    <p class="text-white small mb-4">Take ANY person and transform them step-by-step into a confident, job-ready ethical hacker with a real portfolio and real skills.</p>
+                    <div class="ea-phase-list">
+                        <div class="ea-phase-item"><span class="ea-phase-badge">0A</span> Cybersecurity Overview</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">0B</span> Digital & Computer Foundations</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">1</span> Networking Fundamentals</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">2</span> Linux for Hackers</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">3</span> Security Fundamentals</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">4</span> Web Technology</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">5</span> Web Application Hacking</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">6</span> Recon & OSINT</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">7</span> Tools Mastery</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">8</span> System & Network Attacks</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">9</span> Defensive Security (Blue Team)</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge">10</span> Career, Portfolio & Freelancing</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Programme 2 -->
+            <div class="col-lg-4">
+                <div class="ea-programme-card prog-cisco h-100">
+                    <div class="ea-prog-number">02</div>
+                    <div class="ea-prog-icon"><i class="bi bi-fire"></i></div>
+                    <h4 class="text-white mt-3 mb-2">Cisco Introduction to Cybersecurity</h4>
+                    <p class="text-accent small fw-600 mb-3">Industry-Standard — 5 Modules</p>
+                    <p class="text-white small mb-4">Official Cisco Networking Academy curriculum, globally recognised, delivered with Nigerian context and hands-on labs not in the original.</p>
+                    <div class="ea-phase-list">
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(255,150,0,0.2);color:#fb923c;">1</span> The World of Cybersecurity</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(255,150,0,0.2);color:#fb923c;">2</span> Attacks, Concepts & Techniques</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(255,150,0,0.2);color:#fb923c;">3</span> Protecting Your Data & Privacy</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(255,150,0,0.2);color:#fb923c;">4</span> Protecting the Organisation</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(255,150,0,0.2);color:#fb923c;">5</span> Your Future in Cybersecurity</div>
+                    </div>
+                    <div class="mt-4 p-3" style="background:rgba(255,150,0,0.06);border-radius:8px;border:1px solid rgba(255,150,0,0.15);">
+                        <small class="text-white"><i class="bi bi-patch-check-fill text-warning me-2"></i>Same content used by cybersecurity professionals worldwide — with added Nigerian real-world examples</small>
+                    </div>
+                </div>
+            </div>
+            <!-- Programme 3 -->
+            <div class="col-lg-4">
+                <div class="ea-programme-card prog-django h-100">
+                    <div class="ea-prog-number">03</div>
+                    <div class="ea-prog-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+                    <h4 class="text-white mt-3 mb-2">Web Development with Django</h4>
+                    <p class="text-accent small fw-600 mb-3">Build Real, Secure Web Apps</p>
+                    <p class="text-white small mb-4">Django powers Instagram, Pinterest, and The Washington Post. Nigerian companies are actively hiring Django developers — and paying very well.</p>
+                    <div class="ea-phase-list">
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T1</span> HTML/CSS Foundations</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T1</span> JavaScript Basics</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T2</span> Python Fundamentals</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T2</span> Django Framework</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T2</span> Databases & REST APIs</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T2</span> Security-First Development</div>
+                        <div class="ea-phase-item"><span class="ea-phase-badge" style="background:rgba(100,180,255,0.15);color:#60a5fa;">T2</span> Full Project Deployments</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <p class="text-white mb-3">See the full curriculum — every module, every lesson, every project</p>
+            <a href="{% static 'downloads/Eccentric_Academy_Full_Brochure.pdf' %}"
+               download="Eccentric_Academy_Full_Brochure.pdf"
+               class="btn btn-ea-primary btn-lg">
+                <i class="bi bi-file-earmark-pdf-fill me-2"></i>Download Full Curriculum Brochure (PDF)
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SIGNATURE PROJECTS ============ -->
+<section class="ea-section" style="background:var(--ea-dark);">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="ea-section-tag">Real Projects</p>
+            <h2 class="ea-section-title">Eccentric Academy Signature Projects</h2>
+            <p class="text-white">Real projects built by your instructor — proof that everything taught here actually <strong style="color:var(--ea-accent);">WORKS</strong>. These are not imaginary examples.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(0,229,160,0.1);color:var(--ea-accent);border-color:rgba(0,229,160,0.2);">All Levels</div>
+                    <div class="ea-project-icon">🏠</div>
+                    <h5 class="text-white mb-2">Secure Real Estate Platform</h5>
+                    <p class="text-white small mb-3">A complete property listing platform like Propertymart.ng — built from scratch with SQL injection prevention, role-based access, and a full security audit.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> Real estate fraud is one of the biggest online crimes in Nigeria. Three companies have expressed interest in licensing it.</small></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(234,179,8,0.1);color:#fbbf24;border-color:rgba(234,179,8,0.2);">Intermediate</div>
+                    <div class="ea-project-icon">🛡️</div>
+                    <h5 class="text-white mb-2">ScamShield — Nigerian Anti-Scam Tool</h5>
+                    <p class="text-white small mb-3">A web tool helping ordinary Nigerians identify suspicious links and messages. Detects fake domains, phishing patterns, BVN fraud, and fake JAMB messages.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> This tool has already helped real people avoid being scammed. That is what meaningful tech feels like.</small></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.2);">Advanced</div>
+                    <div class="ea-project-icon">📍</div>
+                    <h5 class="text-white mb-2">Location & Device Tracker via Media</h5>
+                    <p class="text-white small mb-3">An OSINT tool demonstrating how a crafted link/image silently extracts GPS, device type, OS, and browser — taught ONLY for defensive awareness training.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> When students see their own location on the instructor's screen after clicking an image — digital footprints become unforgettable.</small></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(0,229,160,0.1);color:var(--ea-accent);border-color:rgba(0,229,160,0.2);">Beginner → Inter.</div>
+                    <div class="ea-project-icon">📖</div>
+                    <h5 class="text-white mb-2">Online Bible Study Academy</h5>
+                    <p class="text-white small mb-3">A full LMS for a church community — registration, video lessons, quizzes, progress tracking, and certificate generation. Currently used by real students.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> This came from a real church community. When a project serves real people, the learning behind it is also real.</small></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.2);">Advanced</div>
+                    <div class="ea-project-icon">🎓</div>
+                    <h5 class="text-white mb-2">Eccentric Academy Platform</h5>
+                    <p class="text-white small mb-3">The full production LMS running this very academy — with Paystack payments, course delivery, project submissions, and community forum. Advanced students contribute real code.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> How many academies let students build the platform they learn on? Your work here is not practice — it is real.</small></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-project-card h-100">
+                    <div class="ea-project-level-badge" style="background:rgba(239,68,68,0.1);color:#f87171;border-color:rgba(239,68,68,0.2);">Advanced Lab Only</div>
+                    <div class="ea-project-icon">💀</div>
+                    <h5 class="text-white mb-2">Ransomware Simulation (Lab Only)</h5>
+                    <p class="text-white small mb-3">Ransomware simulation in a fully isolated offline environment — understand encryption mechanics, C2 communication, and recovery. Foundation of incident response careers.</p>
+                    <div class="ea-naija-take"><small class="text-warning"><i class="bi bi-geo-alt-fill me-1"></i><strong>Naija Take:</strong> Companies pay enormous fees when ransomware hits. Knowing this from the inside makes you the person they call.</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="ea-section ea-section-dark" id="pricing">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="ea-section-tag">Pricing & Payment Plans</p>
+            <h2 class="ea-section-title">Investing in Yourself Is the<br>Best Investment You'll Ever Make</h2>
+            <p class="text-white">All prices include flexible payment plans. No hidden charges. No surprises.</p>
+            <div class="mt-4 p-3 d-inline-block" style="background:rgba(255,100,0,0.08);border:1px solid rgba(255,100,0,0.2);border-radius:12px;">
+                <small class="text-warning fw-600 me-3"><i class="bi bi-fire me-1"></i>Early Bird (First 20 Students) — 20% Off — Ends In:</small>
+                <div class="ea-countdown d-inline-flex" id="ea-countdown">
+                    <div class="ea-countdown-unit"><span class="ea-countdown-number" id="cd-hours">47</span><span class="ea-countdown-label">Hours</span></div>
+                    <div class="ea-countdown-unit"><span class="ea-countdown-number" id="cd-minutes">23</span><span class="ea-countdown-label">Mins</span></div>
+                    <div class="ea-countdown-unit"><span class="ea-countdown-number" id="cd-seconds">00</span><span class="ea-countdown-label">Secs</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-plan-card h-100">
+                    <div class="ea-plan-tier">🌱 Beginner Level</div>
+                    <div class="ea-plan-name">Foundation</div>
+                    <p class="text-white small">3 Months | 12 Weeks — Zero tech experience needed. Absolute beginners welcome.</p>
+                    <div class="ea-plan-price">₦45,000</div>
+                    <div class="ea-plan-price-note">or ₦15,000/month × 3 months</div>
+                    <ul class="ea-plan-features">
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>12 weeks of beginner-friendly live classes</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>2 classes per week via Zoom or WhatsApp Video</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>All class recordings — rewatch anytime, forever</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>WhatsApp support group — ask questions 24/7</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Hands-on project: personal portfolio website</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Phishing awareness project</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Warm community of fellow learners</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Completion card and progress tracking</span></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'payments:checkout' 'foundation' %}">{% csrf_token %}
+                        <button type="submit" class="btn btn-outline-accent w-100"><i class="bi bi-lock-fill me-2"></i>Enroll — ₦45,000</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-outline-accent w-100"><i class="bi bi-rocket-takeoff me-2"></i>Get Started — ₦45,000</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-plan-card featured h-100">
+                    <div class="ea-plan-badge"><i class="bi bi-star-fill"></i>Most Popular</div>
+                    <div class="ea-plan-tier">🔥 Intermediate Level</div>
+                    <div class="ea-plan-name">Professional</div>
+                    <p class="text-white small">4 Months | 16 Weeks — For those ready to build real skills and a real portfolio.</p>
+                    <div class="ea-plan-price">₦85,000</div>
+                    <div class="ea-plan-price-note">₦25,000/mo × 4 or ₦45,000 × 2 | Loyalty discount: ₦70,000</div>
+                    <ul class="ea-plan-features">
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Everything in Beginner PLUS:</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>16 weeks deep-dive hands-on training</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>3 live classes + 1 practical lab per week</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Live hacking lab access (CTF challenges)</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Build 2 complete portfolio projects</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>ScamShield capstone project</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Location Tracker awareness demo & defence</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Introduction to bug bounty earning</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Professional pentest report template</span></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'payments:checkout' 'professional' %}">{% csrf_token %}
+                        <button type="submit" class="btn btn-ea-primary w-100"><i class="bi bi-lock-fill me-2"></i>Enroll — ₦85,000</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-ea-primary w-100"><i class="bi bi-rocket-takeoff me-2"></i>Get Started — ₦85,000</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-plan-card h-100">
+                    <div class="ea-plan-badge" style="background:rgba(250,204,21,0.1);color:#fbbf24;border-color:rgba(250,204,21,0.3);"><i class="bi bi-lightning-charge-fill"></i>Elite Access</div>
+                    <div class="ea-plan-tier">⚡ Advanced Level</div>
+                    <div class="ea-plan-name">Elite</div>
+                    <p class="text-white small">5 Months | 20 Weeks — For those who want to become true experts and earn seriously.</p>
+                    <div class="ea-plan-price">₦150,000</div>
+                    <div class="ea-plan-price-note">₦35,000/mo × 5 or ₦80,000 × 2 | Loyalty discount: ₦120,000</div>
+                    <ul class="ea-plan-features">
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Everything in Intermediate PLUS:</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>20 weeks of expert-level real-world training</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>3 classes + 2 lab sessions per week</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Unlimited lab access for 6 months</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Bi-weekly 1-on-1 mentorship with instructor</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Full access to ALL instructor project source codes</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>RAT, Ransomware & Location Tracker labs</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Red Team vs. Blue Team live simulations</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>Career guidance, bug bounties, job placement</span></li>
+                        <li><i class="bi bi-check-circle-fill check-icon"></i><span>CV review, LinkedIn & portfolio coaching</span></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'payments:checkout' 'elite' %}">{% csrf_token %}
+                        <button type="submit" class="btn btn-outline-accent w-100"><i class="bi bi-lock-fill me-2"></i>Enroll — ₦150,000</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-outline-accent w-100"><i class="bi bi-rocket-takeoff me-2"></i>Get Started — ₦150,000</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Offers -->
+        <div class="mt-5">
+            <h5 class="text-white text-center mb-4">🎁 Special Offers — Because We Genuinely Want You Here</h5>
+            <div class="row g-3">
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">🐣</span><strong class="text-white d-block">Early Bird</strong><small class="text-white">First 20 students — <span class="text-accent fw-600">20% off</span> any level</small></div></div>
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">👫</span><strong class="text-white d-block">Refer a Friend</strong><small class="text-white">Bring a friend — get <span class="text-accent fw-600">₦5,000 off</span> your next payment</small></div></div>
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">👩</span><strong class="text-white d-block">Women in Tech</strong><small class="text-white">All female students — <span class="text-accent fw-600">15% off</span> any level</small></div></div>
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">🎓</span><strong class="text-white d-block">NYSC / Student</strong><small class="text-white">Valid ID or call-up letter — <span class="text-accent fw-600">10% off</span> immediately</small></div></div>
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">📦</span><strong class="text-white d-block">Full Bundle</strong><small class="text-white">All 3 levels — <span class="text-accent fw-600">₦230,000</span> (save ₦50,000)</small></div></div>
+                <div class="col-md-4 col-sm-6"><div class="ea-offer-card"><span class="ea-offer-emoji">🏢</span><strong class="text-white d-block">Corporate / Group</strong><small class="text-white">5+ from same company — <span class="text-accent fw-600">30% group discount</span></small></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DOWNLOAD CTA BANNER ============ -->
+<section class="ea-section" style="background:linear-gradient(135deg,#0d1520 0%,#0a1a14 100%);border-top:1px solid var(--ea-border);border-bottom:1px solid var(--ea-border);">
+    <div class="container">
+        <div class="row align-items-center g-4 justify-content-between">
+            <div class="col-lg-7">
+                <p class="ea-section-tag">Full Curriculum PDF</p>
+                <h2 class="ea-section-title" style="font-size:2rem;">Download Our Complete Brochure</h2>
+                <p class="text-white mb-0">24 pages covering every module, every lesson, every project, and all pricing. Read it on your phone, WhatsApp it to a friend, print it out.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <div class="d-flex flex-column align-items-lg-end gap-2">
+                    <a href="{% static 'downloads/Eccentric_Academy_Full_Brochure.pdf' %}"
+                       download="Eccentric_Academy_Full_Brochure.pdf"
+                       class="btn btn-ea-primary btn-lg d-inline-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-pdf-fill fs-5"></i>
+                        <span>Download Brochure (PDF)</span>
+                    </a>
+                    <small class="text-white"><i class="bi bi-file-earmark me-1"></i>Free · No signup required · 24 pages</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="ea-section ea-contact" id="contact">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5">
+                <p class="ea-section-tag">Get In Touch</p>
+                <h2 class="ea-section-title">Ready to Start?<br>Let's Talk.</h2>
+                <p class="text-white mb-4">Choosing a plan, have questions, or want corporate training — reach us directly. We respond fast.</p>
+                <div class="d-flex flex-column gap-3">
+                    <a href="https://wa.me/2349136823282" target="_blank" class="ea-contact-info-item text-decoration-none">
+                        <div class="ea-feature-icon" style="width:42px;height:42px;font-size:1.1rem;flex-shrink:0;"><i class="bi bi-whatsapp"></i></div>
+                        <div><small class="text-white d-block">WhatsApp / Call</small><span class="text-white fw-600">+234 9136823282</span></div>
+                    </a>
+                    <a href="https://wa.me/2349035505885" target="_blank" class="ea-contact-info-item text-decoration-none">
+                        <div class="ea-feature-icon" style="width:42px;height:42px;font-size:1.1rem;flex-shrink:0;"><i class="bi bi-whatsapp"></i></div>
+                        <div><small class="text-white d-block">WhatsApp / Call</small><span class="text-white fw-600">+234 9035505885</span></div>
+                    </a>
+                    <div class="ea-contact-info-item">
+                        <div class="ea-feature-icon" style="width:42px;height:42px;font-size:1.1rem;flex-shrink:0;"><i class="bi bi-instagram"></i></div>
+                        <div><small class="text-white d-block">Instagram / TikTok / YouTube / Twitter</small><span class="text-white fw-600">@eccentricacademy</span></div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="#" class="ea-social-btn"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="ea-social-btn"><i class="bi bi-tiktok"></i></a>
+                    <a href="#" class="ea-social-btn"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="ea-social-btn"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="ea-social-btn"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="ea-contact-form">
+                    <h5 class="text-white mb-4">Send Us a Message</h5>
+                    <form id="ea-contact-form" method="POST" action="{% url 'contact:submit' %}" novalidate>
+                        {% csrf_token %}
+                        <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ea-form-group"><label>Full Name</label><input type="text" name="name" class="form-control" placeholder="Adaeze Okonkwo" required></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ea-form-group"><label>Email Address</label><input type="email" name="email" class="form-control" placeholder="adaeze@example.com" required></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="ea-form-group">
+                                    <label>Subject</label>
+                                    <select name="subject" class="form-select" required>
+                                        <option value="">-- Select Subject --</option>
+                                        <option value="enrollment">Enrollment Inquiry</option>
+                                        <option value="technical">Technical Support</option>
+                                        <option value="billing">Billing & Payments</option>
+                                        <option value="partnership">Partnership / Corporate Training</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="ea-form-group"><label>Message</label><textarea name="message" class="form-control" rows="4" placeholder="Tell us how we can help you..." required></textarea></div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-ea-primary w-100"><i class="bi bi-send-fill me-2"></i>Send Message</button>
+                            </div>
+                        </div>
+                        <div id="contact-feedback" style="display:none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FINAL WORD ============ -->
+<section class="ea-section" style="background:var(--ea-dark-2);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div style="font-size:3rem;margin-bottom:1rem;"></div>
+                <p class="ea-section-tag">A Final Word From Us</p>
+                <h2 class="ea-section-title">This Is the Most Important Part of This Whole Page</h2>
+                <p class="text-white mb-4" style="font-size:1.05rem;line-height:1.9;">We built Eccentric Academy because too many talented Nigerians are being left behind. Not because they are not smart enough. But because nobody explained it to them in a language they could understand, with examples from their own lives, in a place that felt safe to ask questions and make mistakes.</p>
+                <div class="row g-3 mb-5 text-start">
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will never feel stupid here — we explain until it clicks</span></div></div>
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will never be left alone — our community is always active</span></div></div>
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will build real things — not just watch videos and forget</span></div></div>
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will finish with skills that can transform your finances</span></div></div>
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will leave with a portfolio that speaks for itself</span></div></div>
+                    <div class="col-md-6"><div class="d-flex gap-2 align-items-start"><i class="bi bi-arrow-right-circle-fill text-accent mt-1 flex-shrink-0"></i><span class="text-white">You will have a mentor who genuinely cares about your outcome</span></div></div>
+                </div>
+                <p class="text-white mb-4" style="font-size:1.15rem;"><em>"Your future is coded — let us help you write it." 🙏</em></p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{% url 'account_signup' %}" class="btn btn-ea-primary btn-lg"><i class="bi bi-rocket-takeoff-fill me-2"></i>Join Eccentric Academy Today</a>
+                    <a href="{% static 'downloads/Eccentric_Academy_Full_Brochure.pdf' %}" download class="btn btn-outline-accent btn-lg"><i class="bi bi-download me-2"></i>Download Brochure</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,245 @@
+[
+  {
+    "model": "courses.plan",
+    "pk": 1,
+    "fields": {
+      "name": "Foundation",
+      "tier": "beginner",
+      "slug": "foundation",
+      "price": "45000.00",
+      "description": "3 Months | 12 Weeks — Zero tech experience needed. Absolute beginners welcome.",
+      "features": [
+        "12 weeks of beginner-friendly live classes",
+        "2 classes per week via Zoom or WhatsApp Video",
+        "All class recordings — rewatch anytime, forever",
+        "WhatsApp support group — ask questions 24/7",
+        "Hands-on project: personal portfolio website",
+        "Phishing awareness project",
+        "Warm community of fellow learners",
+        "Completion card and progress tracking",
+        "Payment plan: ₦15,000/month × 3 months"
+      ],
+      "is_active": true,
+      "seats_available": 20,
+      "is_featured": false,
+      "badge_text": "",
+      "created_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.plan",
+    "pk": 2,
+    "fields": {
+      "name": "Professional",
+      "tier": "intermediate",
+      "slug": "professional",
+      "price": "85000.00",
+      "description": "4 Months | 16 Weeks — For those ready to build real skills and a real portfolio.",
+      "features": [
+        "Everything in Foundation PLUS:",
+        "16 weeks of hands-on deep-dive training",
+        "3 live classes + 1 practical lab session per week",
+        "Live hacking lab access (CTF challenges)",
+        "Build 2 complete portfolio projects",
+        "ScamShield capstone project",
+        "Location Tracker awareness demo & defence",
+        "Introduction to bug bounty earning",
+        "Professional pentest report template",
+        "Payment plan: ₦25,000/month × 4 or ₦45,000 × 2",
+        "Loyalty discount for Foundation graduates: ₦70,000"
+      ],
+      "is_active": true,
+      "seats_available": 20,
+      "is_featured": true,
+      "badge_text": "Most Popular",
+      "created_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.plan",
+    "pk": 3,
+    "fields": {
+      "name": "Elite",
+      "tier": "advanced",
+      "slug": "elite",
+      "price": "150000.00",
+      "description": "5 Months | 20 Weeks — For those who want to become true experts and earn seriously.",
+      "features": [
+        "Everything in Professional PLUS:",
+        "20 weeks of expert-level real-world training",
+        "3 classes + 2 lab sessions per week",
+        "Unlimited lab access for 6 months",
+        "Bi-weekly 1-on-1 mentorship with the instructor",
+        "Full access to ALL instructor project source codes",
+        "RAT, Ransomware & Location Tracker lab projects",
+        "Red Team vs. Blue Team live simulation exercises",
+        "Career guidance: bug bounties, freelancing, job placement",
+        "CV review, LinkedIn optimisation, portfolio coaching",
+        "Payment plan: ₦35,000/month × 5 or ₦80,000 × 2",
+        "Loyalty discount for Professional graduates: ₦120,000"
+      ],
+      "is_active": true,
+      "seats_available": 20,
+      "is_featured": false,
+      "badge_text": "Elite Access",
+      "created_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.category",
+    "pk": 1,
+    "fields": { "name": "Ethical Hacking", "slug": "ethical-hacking", "icon": "shield-exclamation", "description": "Offensive security and penetration testing" }
+  },
+  {
+    "model": "courses.category",
+    "pk": 2,
+    "fields": { "name": "Network Security", "slug": "network-security", "icon": "diagram-3", "description": "Network defense, monitoring, and protocols" }
+  },
+  {
+    "model": "courses.category",
+    "pk": 3,
+    "fields": { "name": "Web Security", "slug": "web-security", "icon": "globe", "description": "Web application security and OWASP" }
+  },
+  {
+    "model": "courses.category",
+    "pk": 4,
+    "fields": { "name": "Malware & Forensics", "slug": "malware-forensics", "icon": "bug", "description": "Malware analysis and digital forensics" }
+  },
+  {
+    "model": "courses.category",
+    "pk": 5,
+    "fields": { "name": "Web Development", "slug": "web-development", "icon": "code-slash", "description": "HTML, CSS, JavaScript, Python & Django" }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1,
+    "fields": {
+      "title": "Cybersecurity Overview & Ethical Hacking Fundamentals",
+      "slug": "cybersecurity-overview",
+      "category": 1,
+      "plans": [1, 2, 3],
+      "instructor": "Eccentric Academy",
+      "description": "Phase 0A: Understand the world you are entering. What cybersecurity means in simple everyday language, how Nigerian banks and companies get attacked daily, and the real earning potential of ethical hackers in Nigeria and internationally.",
+      "short_description": "Understand cybersecurity from scratch — what it is, who does it, and why it matters in Nigeria.",
+      "difficulty": "beginner",
+      "duration_hours": 8,
+      "is_published": true,
+      "is_featured": true,
+      "what_you_learn": ["What cybersecurity means in plain language", "How Nigerian companies get attacked daily", "Difference between internet, dark web, and deep web", "Real earning potential: bug bounties, freelance pentesting", "Key terminologies: vulnerability, exploit, payload, malware"],
+      "prerequisites": ["No prior tech experience needed"],
+      "tools_covered": ["Kali Linux overview", "Metasploit overview", "Nmap overview"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2,
+    "fields": {
+      "title": "Linux for Hackers — Complete Mastery",
+      "slug": "linux-for-hackers",
+      "category": 2,
+      "plans": [1, 2, 3],
+      "instructor": "Eccentric Academy",
+      "description": "Phase 2: Linux is a hacker's home. Master the Linux command line, file permissions, user accounts, bash scripting, and 50+ essential commands every ethical hacker must know. Complete hands-on labs simulate real-world hacker scenarios.",
+      "short_description": "Master Linux from the command line — 50+ essential commands, bash scripting, and real hacker scenarios.",
+      "difficulty": "beginner",
+      "duration_hours": 15,
+      "is_published": true,
+      "is_featured": true,
+      "what_you_learn": ["Linux file system structure and navigation", "50+ essential Linux commands", "Bash scripting for automation", "User accounts, permissions, and root access", "Network commands: ifconfig, netstat, curl, nmap"],
+      "prerequisites": ["Phase 0A & 0B completion recommended"],
+      "tools_covered": ["Kali Linux", "bash", "nmap", "netstat", "grep", "awk"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 3,
+    "fields": {
+      "title": "Web Application Hacking — OWASP Top 10",
+      "slug": "web-application-hacking",
+      "category": 3,
+      "plans": [2, 3],
+      "instructor": "Eccentric Academy",
+      "description": "Phase 5: The skills that make clients pay serious money. Deep dive into OWASP Top 10 with live demos and hands-on labs. SQL injection, XSS, broken authentication, IDOR, and security misconfiguration — all with Burp Suite end-to-end.",
+      "short_description": "Identify, exploit and remediate the OWASP Top 10 — with live demos and real labs using Burp Suite.",
+      "difficulty": "intermediate",
+      "duration_hours": 25,
+      "is_published": true,
+      "is_featured": true,
+      "what_you_learn": ["SQL Injection: extract a full database", "Cross-Site Scripting (XSS): steal session cookies", "Broken Authentication bypass", "IDOR: access other users' private data", "Burp Suite: spider, scanner, repeater, intruder"],
+      "prerequisites": ["Linux fundamentals", "Networking basics", "Phase 4: Web Technology"],
+      "tools_covered": ["Burp Suite", "sqlmap", "OWASP ZAP", "Metasploit"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 4,
+    "fields": {
+      "title": "Reconnaissance & OSINT Mastery",
+      "slug": "recon-and-osint",
+      "category": 1,
+      "plans": [2, 3],
+      "instructor": "Eccentric Academy",
+      "description": "Phase 6: Information is power. Hackers spend 70% of their time here. Master passive and active reconnaissance using Google Dorking, Shodan, WHOIS, DNS enumeration, social media OSINT, and Nmap advanced scanning.",
+      "short_description": "Master passive and active recon — Google Dorking, Shodan, OSINT, and Nmap deep scanning.",
+      "difficulty": "intermediate",
+      "duration_hours": 18,
+      "is_published": true,
+      "is_featured": false,
+      "what_you_learn": ["Google Dorking for hidden files and login pages", "Shodan: the Google for hackers", "WHOIS, DNS enumeration, subdomain discovery", "Social media OSINT: Instagram, LinkedIn, Twitter", "Active recon: Nmap aggressive scans, OS detection"],
+      "prerequisites": ["Linux fundamentals", "Phase 3: Security Fundamentals"],
+      "tools_covered": ["Nmap", "Shodan", "Maltego", "Gobuster", "Dirb", "theHarvester"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 5,
+    "fields": {
+      "title": "Defensive Security & Blue Team Operations",
+      "slug": "defensive-security-blue-team",
+      "category": 2,
+      "plans": [2, 3],
+      "instructor": "Eccentric Academy",
+      "description": "Phase 9: What makes Eccentric Academy unique — most hacking courses never teach defence. Learn firewalls, IDS/IPS, SIEM systems, endpoint protection, incident response, and digital forensics. Includes Red vs. Blue Team live simulation.",
+      "short_description": "Master firewalls, IDS, SIEM, incident response, and digital forensics — the Blue Team perspective.",
+      "difficulty": "intermediate",
+      "duration_hours": 20,
+      "is_published": true,
+      "is_featured": false,
+      "what_you_learn": ["Firewall types and configuration", "IDS and IPS: your digital security guards", "SIEM: detecting attacks in real time", "Digital forensics: recovering deleted files", "Incident response: what to do in the first 60 minutes"],
+      "prerequisites": ["Phase 3 & 8 completion recommended"],
+      "tools_covered": ["Snort", "Wireshark", "Splunk", "Autopsy", "Volatility"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 6,
+    "fields": {
+      "title": "Web Development with Django — Full Stack",
+      "slug": "web-development-django",
+      "category": 5,
+      "plans": [3],
+      "instructor": "Eccentric Academy",
+      "description": "Programme 3: Build real, secure web applications from scratch using HTML/CSS, JavaScript, Python, and Django. Covers the full stack from front-end foundations to deployment on a live server. Security-first development built in from day one.",
+      "short_description": "Build real, secure Django web apps from scratch — HTML to deployment. Used by Instagram and Pinterest.",
+      "difficulty": "advanced",
+      "duration_hours": 40,
+      "is_published": true,
+      "is_featured": true,
+      "what_you_learn": ["HTML, CSS, and JavaScript foundations", "Python fundamentals in plain language", "Django MVT pattern and URL routing", "Database design with PostgreSQL", "REST APIs and security-first development", "Full deployment to a live server with real URL"],
+      "prerequisites": ["Basic computer knowledge", "Phase 2: Linux recommended"],
+      "tools_covered": ["Django", "Python", "PostgreSQL", "Git", "Nginx", "Gunicorn"],
+      "created_at": "2025-01-01T00:00:00Z",
+      "updated_at": "2025-01-01T00:00:00Z"
+    }
+  }
+]

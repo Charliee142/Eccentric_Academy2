@@ -1,0 +1,17 @@
+Dear {{ user.first_name|default:user.email }},
+
+Your enrollment in Eccentric Academy is confirmed!
+
+Plan: {{ plan.name }} ({{ plan.get_tier_display }} Tier)
+Payment Reference: {{ payment.reference }}
+Amount Paid: ₦{{ payment.amount|floatformat:0 }}
+
+You now have lifetime access to {{ courses.count }} courses.
+
+Log in to your dashboard: {{ site_url }}/dashboard/
+
+Welcome to the {{ site_name }} community!
+
+—
+The Eccentric Academy Team
+Lagos & Abuja, Nigeria

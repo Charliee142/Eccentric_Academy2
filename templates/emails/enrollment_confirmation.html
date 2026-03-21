@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body { font-family: 'DM Sans', Arial, sans-serif; background: #0a0d14; color: #e2e8f0; margin: 0; padding: 20px; }
+.container { max-width: 580px; margin: 0 auto; background: #141929; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+.header { background: linear-gradient(135deg, #141929, #161b2e); padding: 40px; text-align: center; border-bottom: 1px solid rgba(0,229,160,0.2); }
+.logo-icon { font-size: 3rem; color: #00e5a0; }
+.header h1 { color: white; font-size: 1.5rem; margin: 12px 0 0; }
+.body { padding: 32px; }
+.success-badge { background: rgba(0,229,160,0.1); border: 1px solid rgba(0,229,160,0.3); color: #00e5a0; padding: 8px 20px; border-radius: 100px; display: inline-block; font-size: 0.85rem; margin-bottom: 24px; }
+.details-box { background: #0a0d14; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin: 24px 0; }
+.detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: #8892a4; font-size: 0.85rem; }
+.detail-value { color: white; font-size: 0.85rem; font-weight: 600; }
+.cta-btn { display: block; background: #00e5a0; color: #0a0d14; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; text-align: center; margin: 24px 0; font-size: 0.9rem; }
+.footer { background: #0a0d14; padding: 24px; text-align: center; color: #8892a4; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo-icon">🛡️</div>
+        <h1>Enrollment Confirmed!</h1>
+    </div>
+    <div class="body">
+        <p>Hi <strong style="color:white;">{{ user.first_name|default:user.email }}</strong>,</p>
+        <div class="success-badge">✓ Payment Verified by Paystack</div>
+        <p style="color:#8892a4;">Your enrollment in <strong style="color:#00e5a0;">{{ plan.name }}</strong> is confirmed. You now have lifetime access to all courses in the {{ plan.get_tier_display }} tier.</p>
+
+        <div class="details-box">
+            <div class="detail-row">
+                <span class="detail-label">Plan</span>
+                <span class="detail-value">{{ plan.name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Tier</span>
+                <span class="detail-value">{{ plan.get_tier_display }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Courses</span>
+                <span class="detail-value">{{ courses.count }} courses</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Amount Paid</span>
+                <span class="detail-value" style="color:#00e5a0;">₦{{ payment.amount|floatformat:0 }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Reference</span>
+                <span class="detail-value" style="font-family:monospace;font-size:0.75rem;">{{ payment.reference }}</span>
+            </div>
+        </div>
+
+        <a href="{{ site_url }}/dashboard/" class="cta-btn">Access Your Dashboard →</a>
+
+        <p style="color:#8892a4;font-size:0.85rem;">If you have any questions, reply to this email or reach us via WhatsApp.</p>
+    </div>
+    <div class="footer">
+        <strong style="color:white;">{{ site_name }}</strong> · Lagos & Abuja, Nigeria<br>
+        <span>This is an automated confirmation email.</span>
+    </div>
+</div>
+</body>
+</html>

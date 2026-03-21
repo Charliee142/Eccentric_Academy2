@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Catalog – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-section" style="min-height:100vh;">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <p class="ea-section-tag">Curriculum</p>
+                <h1 class="ea-section-title">Course Catalog</h1>
+                <p class="text-white">Browse our full curriculum. Enroll in a plan to unlock access to every course.</p>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-lg-end gap-2 flex-wrap mt-3 mt-lg-0">
+                <!-- Filter by difficulty -->
+                <a href="{% url 'courses:catalog' %}" class="btn btn-sm {% if not selected_difficulty %}btn-accent{% else %}btn-outline-accent{% endif %}">All</a>
+                <a href="?difficulty=beginner{% if selected_category %}&category={{ selected_category }}{% endif %}" class="btn btn-sm {% if selected_difficulty == 'beginner' %}btn-accent{% else %}btn-outline-accent{% endif %}">Beginner</a>
+                <a href="?difficulty=intermediate{% if selected_category %}&category={{ selected_category }}{% endif %}" class="btn btn-sm {% if selected_difficulty == 'intermediate' %}btn-accent{% else %}btn-outline-accent{% endif %}">Intermediate</a>
+                <a href="?difficulty=advanced{% if selected_category %}&category={{ selected_category }}{% endif %}" class="btn btn-sm {% if selected_difficulty == 'advanced' %}btn-accent{% else %}btn-outline-accent{% endif %}">Advanced</a>
+            </div>
+        </div>
+
+        <!-- Category filter tabs -->
+        {% if categories %}
+        <div class="d-flex gap-2 flex-wrap mb-4">
+            <a href="{% url 'courses:catalog' %}{% if selected_difficulty %}?difficulty={{ selected_difficulty }}{% endif %}" class="btn btn-sm {% if not selected_category %}btn-outline-accent{% else %}btn-sm text-white{% endif %}" style="border-color:var(--ea-border);">
+                All Topics
+            </a>
+            {% for cat in categories %}
+            <a href="?category={{ cat.slug }}{% if selected_difficulty %}&difficulty={{ selected_difficulty }}{% endif %}" class="btn btn-sm {% if selected_category == cat.slug %}btn-outline-accent{% else %}text-white{% endif %}" style="border:1px solid var(--ea-border);">
+                {{ cat.name }}
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Course Grid -->
+        <div class="row g-4">
+            {% for course in courses %}
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-course-card h-100">
+                    <div class="ea-course-thumb">
+                      <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}">
+                    </div>
+                    <div class="ea-course-body">
+                        {% if course.category %}
+                        <div class="ea-course-category">{{ course.category.name }}</div>
+                        {% endif %}
+                        <div class="ea-course-title">{{ course.title }}</div>
+                        <p class="text-white small mb-3">{{ course.short_description }}</p>
+
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge badge-{{ course.difficulty }} py-1 px-2 rounded-pill" style="font-size:0.7rem;">
+                                {{ course.get_difficulty_display }}
+                            </span>
+                            <small class="text-white"><i class="bi bi-clock me-1"></i>{{ course.duration_hours }}h</small>
+                        </div>
+
+                        <!-- Plans that include this course -->
+                        <div class="d-flex gap-1 flex-wrap mb-3">
+                            {% for plan in course.plans.all %}
+                            <span class="badge" style="font-size:0.6rem;background:rgba(0,229,160,0.1);color:var(--ea-accent);border:1px solid rgba(0,229,160,0.2);">
+                                {{ plan.name }}
+                            </span>
+                            {% endfor %}
+                        </div>
+
+                        {% if user.is_authenticated %}
+                            {% if course.plans.all.0.id in user_plan_ids %}
+                            <a href="{% url 'courses:course_detail' course.slug %}" class="btn btn-ea-primary btn-sm w-100">
+                                <i class="bi bi-play-fill me-1"></i>Start Course
+                            </a>
+                            {% else %}
+                            <a href="{% url 'courses:pricing' %}" class="btn btn-outline-accent btn-sm w-100">
+                                <i class="bi bi-lock me-1"></i>Enroll to Access
+                            </a>
+                            {% endif %}
+                        {% else %}
+                        <a href="{% url 'account_signup' %}" class="btn btn-outline-accent btn-sm w-100">
+                            <i class="bi bi-lock me-1"></i>Sign Up to Access
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-search fs-1 text-white mb-3 d-block"></i>
+                <h5 class="text-white">No courses found</h5>
+                <p class="text-white small">Try adjusting your filters</p>
+                <a href="{% url 'courses:catalog' %}" class="btn btn-outline-accent btn-sm">Clear Filters</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

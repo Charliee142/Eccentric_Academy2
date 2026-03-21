@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }} – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-section" style="min-height:100vh;">
+    <div class="container">
+        <!-- Course Header -->
+        <div class="row g-5 mb-5">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <a href="{% url 'courses:catalog' %}" class="text-white text-decoration-none small"><i class="bi bi-arrow-left me-1"></i>Catalog</a>
+                    <span class="text-white">/</span>
+                    {% if course.category %}
+                    <span class="text-white small">{{ course.category.name }}</span>
+                    {% endif %}
+                </div>
+                <h1 class="text-white mb-3" style="font-size:2rem;">{{ course.title }}</h1>
+                <p class="text-white mb-4">{{ course.description }}</p>
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                    <span class="badge badge-{{ course.difficulty }} py-1 px-3">{{ course.get_difficulty_display }}</span>
+                    <small class="text-white"><i class="bi bi-clock me-1"></i>{{ course.duration_hours }} hours</small>
+                    <small class="text-white"><i class="bi bi-person-fill me-1"></i>{{ course.instructor }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <!-- Course Content -->
+            <div class="col-lg-8">
+                <!-- What You'll Learn -->
+                {% if course.what_you_learn %}
+                <div class="mb-5 p-4" style="background:var(--ea-card);border:1px solid var(--ea-border);border-radius:var(--radius-lg);">
+                    <h5 class="text-white mb-3"><i class="bi bi-lightbulb-fill text-accent me-2"></i>What You'll Learn</h5>
+                    <div class="row g-2">
+                        {% for item in course.what_you_learn %}
+                        <div class="col-md-6">
+                            <div class="d-flex gap-2">
+                                <i class="bi bi-check-circle-fill text-accent mt-1 flex-shrink-0"></i>
+                                <small class="text-white">{{ item }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Course Modules -->
+                {% if modules %}
+                <h5 class="text-white mb-3"><i class="bi bi-collection-fill text-accent me-2"></i>Course Content</h5>
+                <div class="accordion" id="modulesAccordion" style="--bs-accordion-bg:var(--ea-card);--bs-accordion-border-color:var(--ea-border);--bs-accordion-btn-color:white;--bs-accordion-btn-bg:var(--ea-card);--bs-accordion-active-bg:var(--ea-dark-3);">
+                    {% for module in modules %}
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.id }}">
+                                <span>{{ module.title }}</span>
+                                <span class="ms-auto me-3 text-white small">{{ module.lessons.count }} lessons</span>
+                            </button>
+                        </h2>
+                        <div id="module{{ module.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}">
+                            <div class="accordion-body p-0">
+                                {% for lesson in module.lessons.all %}
+                                <div class="d-flex align-items-center justify-content-between p-3" style="border-bottom:1px solid var(--ea-border);">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-{% if lesson.content_type == 'video' %}play-circle{% elif lesson.content_type == 'lab' %}terminal{% elif lesson.content_type == 'quiz' %}question-circle{% else %}file-text{% endif %} text-accent"></i>
+                                        <small class="text-white">{{ lesson.title }}</small>
+                                    </div>
+                                    <small class="text-white">{{ lesson.duration_minutes }}min</small>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="p-4 text-center" style="background:var(--ea-card);border-radius:var(--radius);border:1px solid var(--ea-border);">
+                    <i class="bi bi-play-circle fs-1 text-white d-block mb-2"></i>
+                    <p class="text-white">Course content is being prepared. Check back soon!</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="ea-sidebar" style="position:sticky;top:90px;">
+                    <h6 class="text-white mb-3">Course Info</h6>
+                    <div class="d-flex flex-column gap-2 mb-4">
+                        <div class="d-flex justify-content-between">
+                            <small class="text-white">Difficulty</small>
+                            <span class="badge badge-{{ course.difficulty }}" style="font-size:0.65rem;">{{ course.get_difficulty_display }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-white">Duration</small>
+                            <small class="text-white">{{ course.duration_hours }} hours</small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-white">Instructor</small>
+                            <small class="text-white">{{ course.instructor }}</small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small class="text-white">Modules</small>
+                            <small class="text-white">{{ modules.count }}</small>
+                        </div>
+                    </div>
+
+                    {% if course.tools_covered %}
+                    <h6 class="text-white mb-2">Tools Covered</h6>
+                    <div class="d-flex flex-wrap gap-1 mb-4">
+                        {% for tool in course.tools_covered %}
+                        <span class="badge" style="background:var(--ea-dark-3);color:var(--ea-muted);border:1px solid var(--ea-border);font-size:0.65rem;font-family:'Space Mono',monospace;">{{ tool }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if course.prerequisites %}
+                    <h6 class="text-white mb-2">Prerequisites</h6>
+                    <ul class="list-unstyled">
+                        {% for pre in course.prerequisites %}
+                        <li class="d-flex gap-2 mb-1">
+                            <i class="bi bi-dot text-accent"></i>
+                            <small class="text-white">{{ pre }}</small>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

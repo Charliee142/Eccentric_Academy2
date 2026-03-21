@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Payment History – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-dashboard py-5">
+    <div class="container">
+        <div class="d-flex align-items-center mb-4 gap-3">
+            <a href="{% url 'accounts:dashboard' %}" class="text-white text-decoration-none">
+                <i class="bi bi-arrow-left"></i> Dashboard
+            </a>
+            <h2 class="text-white mb-0">Payment History</h2>
+        </div>
+
+        <div class="table-responsive">
+            <table style="width:100%;border-collapse:separate;border-spacing:0 8px;">
+                <thead>
+                    <tr style="color:var(--ea-white);font-family:'Space Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;">
+                        <th class="pb-2">Reference</th>
+                        <th class="pb-2">Plan</th>
+                        <th class="pb-2">Amount</th>
+                        <th class="pb-2">Method</th>
+                        <th class="pb-2">Status</th>
+                        <th class="pb-2">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                    <tr style="background:var(--ea-card);border-radius:8px;">
+                        <td style="padding:1rem;border-radius:8px 0 0 8px;font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--ea-muted);">
+                            {{ payment.reference|truncatechars:20 }}
+                        </td>
+                        <td style="padding:1rem;color:white;">{{ payment.plan.name }}</td>
+                        <td style="padding:1rem;color:var(--ea-accent);font-weight:600;">{{ payment.amount_formatted }}</td>
+                        <td style="padding:1rem;color:var(--ea-white);text-transform:capitalize;">{{ payment.channel|default:"—" }}</td>
+                        <td style="padding:1rem;">
+                            <span class="badge py-1 px-2" style="font-size:0.7rem;
+                                {% if payment.status == 'success' %}background:rgba(34,197,94,0.15);color:#4ade80;
+                                {% elif payment.status == 'pending' %}background:rgba(234,179,8,0.15);color:#fbbf24;
+                                {% else %}background:rgba(239,68,68,0.15);color:#f87171;{% endif %}">
+                                {{ payment.get_status_display }}
+                            </span>
+                        </td>
+                        <td style="padding:1rem;border-radius:0 8px 8px 0;color:var(--ea-white);font-size:0.85rem;">
+                            {{ payment.created_at|date:"M d, Y" }}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-white">No payments yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

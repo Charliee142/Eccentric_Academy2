@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Pricing Plans – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-section" style="min-height:100vh;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="ea-section-tag">Enrollment Plans</p>
+            <h1 class="ea-section-title">One Payment, Full Access</h1>
+            <p class="text-white">Choose your learning tier. All plans include lifetime access to every course within that tier.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            {% for plan in plans %}
+            <div class="col-lg-4 col-md-6">
+                <div class="ea-plan-card {% if plan.is_featured %}featured{% endif %}">
+                    {% if plan.badge_text %}
+                    <div class="ea-plan-badge">
+                        <i class="bi bi-star-fill"></i> {{ plan.badge_text }}
+                    </div>
+                    {% endif %}
+                    <div class="ea-plan-tier">{{ plan.get_tier_display }} Tier</div>
+                    <div class="ea-plan-name">{{ plan.name }}</div>
+                    <p class="text-white small">{{ plan.description }}</p>
+                    <div class="ea-plan-price">{{ plan.price_formatted }}</div>
+                    <div class="ea-plan-price-note">One-time · Lifetime access · No renewals</div>
+
+                    {% if plan.seats_available > 0 %}
+                    <div class="ea-seats-bar">
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-white">{{ plan.enrolled_count }} enrolled</small>
+                            <small class="text-{% if plan.seats_left <= 5 %}danger{% else %}text-white{% endif %}">
+                                {% if plan.seats_left %}{{ plan.seats_left }} seats left{% else %}Sold out{% endif %}
+                            </small>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:{{ plan.enrolled_count }}%"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <ul class="ea-plan-features">
+                        {% for feature in plan.features %}
+                        <li>
+                            <i class="bi bi-check-circle-fill check-icon"></i>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <i class="bi bi-collection-fill check-icon"></i>
+                            <span><strong class="text-accent">{{ plan.courses.count }}</strong> courses included</span>
+                        </li>
+                    </ul>
+
+                    {% if user.is_authenticated %}
+                        {% if plan.id in user_plans %}
+                        <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-accent w-100">
+                            <i class="bi bi-check-circle me-2"></i>Already Enrolled – Go to Dashboard
+                        </a>
+                        {% else %}
+                         <a href="{% url 'payments:checkout' plan.slug %}" 
+   class="btn btn-{% if plan.is_featured %}ea-primary{% else %}outline-accent{% endif %} w-100">
+    <i class="bi bi-lock-fill me-2"></i>
+    Enroll – {{ plan.price_formatted }}
+</a>
+                        {% endif %}
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-{% if plan.is_featured %}ea-primary{% else %}outline-accent{% endif %} w-100">
+                        <i class="bi bi-rocket-takeoff me-2"></i>Get Started – {{ plan.price_formatted }}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- FAQ / reassurance -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <div class="text-center mb-4">
+                    <h4 class="text-white">Frequently Asked Questions</h4>
+                </div>
+                <div class="accordion" id="faqAccordion" style="--bs-accordion-bg:var(--ea-card);--bs-accordion-border-color:var(--ea-border);--bs-accordion-btn-color:white;--bs-accordion-btn-bg:var(--ea-card);--bs-accordion-active-bg:var(--ea-dark-3);--bs-accordion-active-color:var(--ea-accent);">
+                    <div class="accordion-item mb-2" style="border-radius:12px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Can I upgrade my plan later?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white small">
+                                Yes! You can purchase a higher-tier plan at any time. Your existing access remains active, and the new plan adds access to higher-tier courses on top.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-2" style="border-radius:12px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                What payment methods are accepted?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white small">
+                                We accept all major Nigerian payment methods via Paystack: debit/credit cards (Verve, Mastercard, Visa), bank transfers, USSD, and mobile money. All payments are in Naira (NGN).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-2" style="border-radius:12px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Is my payment information secure?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white small">
+                                Absolutely. We use Paystack — Nigeria's most trusted payment gateway — for all transactions. We never store your card details. All payments are verified server-side to prevent fraud.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" style="border-radius:12px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                How long do I have access after enrolling?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-white small">
+                                Lifetime access! Once you enroll in a plan, you have permanent access to all courses within that tier — including any new courses added to the plan in the future.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

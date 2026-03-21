@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us – Eccentric Academy{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="ea-section" style="padding-bottom:2rem;padding-top:5rem;min-height:auto;">
+    <div class="container">
+        <div class="text-center">
+            <p class="ea-section-tag">Get In Touch</p>
+            <h1 class="ea-section-title">We're Here to Help</h1>
+            <p class="text-white" style="max-width:540px;margin:0 auto;">
+                Whether you're choosing a plan, have a billing question, need tech support, or want to discuss corporate training — our team responds fast.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info Cards -->
+<section style="padding-bottom:2rem;">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <a href="https://wa.me/2349136823282" target="_blank" class="text-decoration-none">
+                    <div class="ea-contact-info-card">
+                        <div class="ea-contact-info-icon" style="color:#25d366;background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2);">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                        <h6 class="text-white mb-1">WhatsApp</h6>
+                        <p class="text-white small mb-0">+234 9136823282</p>
+                        <small class="text-accent">Tap to chat →</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <a href="https://wa.me/2349035505885" target="_blank" class="text-decoration-none">
+                    <div class="ea-contact-info-card">
+                        <div class="ea-contact-info-icon" style="color:#25d366;background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2);">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                        <h6 class="text-white mb-1">WhatsApp</h6>
+                        <p class="text-white small mb-0">+234 9035505885</p>
+                        <small class="text-accent">Tap to chat →</small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="ea-contact-info-card">
+                    <div class="ea-contact-info-icon">
+                        <i class="bi bi-instagram"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Social Media</h6>
+                    <p class="text-white small mb-0">Instagram / TikTok / YouTube / X</p>
+                    <small class="text-accent">@eccentricacademy</small>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="ea-contact-info-card">
+                    <div class="ea-contact-info-icon">
+                        <i class="bi bi-clock-fill"></i>
+                    </div>
+                    <h6 class="text-white mb-1">Support Hours</h6>
+                    <p class="text-white small mb-0">Monday – Friday</p>
+                    <small class="text-accent">8:00 AM – 6:00 PM WAT</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Form + FAQ -->
+<section class="ea-section ea-section-dark" style="padding-top:3rem;">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <h4 class="text-white mb-4">Send Us a Message</h4>
+
+                <!-- Success / Error feedback (for non-AJAX fallback) -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}success{% endif %} mb-4" style="background:{% if message.tags == 'error' %}rgba(239,68,68,0.1){% else %}rgba(0,229,160,0.08){% endif %};border:1px solid {% if message.tags == 'error' %}rgba(239,68,68,0.3){% else %}rgba(0,229,160,0.25){% endif %};border-radius:10px;color:{% if message.tags == 'error' %}#f87171{% else %}var(--ea-accent){% endif %};">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <div class="ea-contact-form">
+                    <form id="ea-contact-form" method="POST" action="{% url 'contact:submit' %}" novalidate>
+                        {% csrf_token %}
+                        <!-- Honeypot anti-spam -->
+                        <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="ea-form-group">
+                                    <label>Full Name <span class="text-danger">*</span></label>
+                                    <input type="text"
+                                           name="name"
+                                           class="form-control ea-input"
+                                           placeholder="Adaeze Okonkwo"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ea-form-group">
+                                    <label>Email Address <span class="text-danger">*</span></label>
+                                    <input type="email"
+                                           name="email"
+                                           class="form-control ea-input"
+                                           placeholder="adaeze@example.com"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ea-form-group">
+                                    <label>Phone Number <span class="text-muted">(optional)</span></label>
+                                    <input type="tel"
+                                           name="phone"
+                                           class="form-control ea-input"
+                                           placeholder="+234 800 000 0000">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ea-form-group">
+                                    <label>Subject <span class="text-danger">*</span></label>
+                                    <select name="subject" class="form-select ea-input" required>
+                                        <option value="">-- Select a subject --</option>
+                                        <option value="enrollment">Enrollment Inquiry</option>
+                                        <option value="technical">Technical Support</option>
+                                        <option value="billing">Billing & Payments</option>
+                                        <option value="partnership">Partnership / Corporate Training</option>
+                                        <option value="discount">Discount / Special Offer</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="ea-form-group">
+                                    <label>Message <span class="text-danger">*</span></label>
+                                    <textarea name="message"
+                                              class="form-control ea-input"
+                                              rows="5"
+                                              placeholder="Tell us how we can help you. The more detail, the faster we can assist..."
+                                              required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-ea-primary btn-lg w-100">
+                                    <i class="bi bi-send-fill me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="contact-feedback" style="display:none;" class="mt-3"></div>
+                    </form>
+                </div>
+
+                <p class="text-white small text-center mt-3">
+                    <i class="bi bi-shield-check text-accent me-1"></i>
+                    Your information is private. We never share it with third parties.
+                </p>
+            </div>
+
+            <!-- FAQ Sidebar -->
+            <div class="col-lg-5">
+                <h4 class="text-white mb-4">Common Questions</h4>
+
+                <div class="accordion" id="contactFAQ"
+                     style="--bs-accordion-bg:var(--ea-card);--bs-accordion-border-color:var(--ea-border);
+                            --bs-accordion-btn-color:white;--bs-accordion-btn-bg:var(--ea-card);
+                            --bs-accordion-active-bg:var(--ea-dark-3);--bs-accordion-active-color:var(--ea-accent);">
+
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I enroll and pay?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                Click any "Enroll" button, create a free account, then pay securely via Paystack using your card, bank transfer, or USSD. You get immediate access after payment is verified.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Are there payment plans?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                Yes! Foundation: ₦15,000/month × 3. Professional: ₦25,000/month × 4. Elite: ₦35,000/month × 5. WhatsApp us to set up your installment plan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Do I need prior tech experience?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                Absolutely not. The Foundation level starts from complete zero — if you can use WhatsApp, you can start this course. We teach in plain Naija English.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                How are classes delivered?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                Live classes via Zoom and WhatsApp Video, with full recordings available to rewatch anytime. You also get 24/7 access to the WhatsApp support group.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-2" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                What discounts are available?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                Early Bird (first 20 students) — 20% off. Women in Tech — 15% off. NYSC/Students — 10% off. Refer a Friend — ₦5,000 off. Corporate groups (5+) — 30% off. WhatsApp us to claim your discount.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item" style="border-radius:10px;overflow:hidden;">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                Is there a refund policy?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                            <div class="accordion-body text-white small">
+                                We're confident you'll love the programme. If you have any concerns within the first week, contact us directly on WhatsApp and we'll resolve it fairly.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Quick WhatsApp CTA -->
+                <div class="mt-4 p-4 text-center" style="background:rgba(37,211,102,0.05);border:1px solid rgba(37,211,102,0.15);border-radius:12px;">
+                    <i class="bi bi-whatsapp text-success d-block mb-2" style="font-size:2rem;"></i>
+                    <p class="text-white small fw-600 mb-1">Prefer to chat directly?</p>
+                    <p class="text-white small mb-3">Send us a WhatsApp message and we'll reply within minutes during business hours.</p>
+                    <a href="https://wa.me/2349136823282?text=Hello%20Eccentric%20Academy%2C%20I%20have%20a%20question%20about%20enrollment."
+                       target="_blank"
+                       class="btn btn-ea-primary btn-sm w-100">
+                        <i class="bi bi-whatsapp me-2"></i>Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

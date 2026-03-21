@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Account – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-auth-page">
+    <div class="ea-hero-grid"></div>
+    <div class="ea-hero-orb-2" style="bottom:-50px;left:-50px;width:350px;height:350px;"></div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+
+                <!-- Logo -->
+                <div class="text-center mb-4">
+                    <a href="{% url 'core:home' %}" class="text-decoration-none d-inline-flex align-items-center gap-2">
+                        <span style="font-size:2rem;color:var(--ea-accent);filter:drop-shadow(0 0 8px var(--ea-accent));">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </span>
+                        <span style="font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700;color:white;">
+                            Eccentric<span style="color:var(--ea-accent);">Academy</span>
+                        </span>
+                    </a>
+                    <div class="mt-2">
+                        <span class="ea-hero-tag" style="display:inline-flex;">
+                            <span class="dot"></span>
+                            Join 100+ Nigerian cybersecurity students
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card -->
+                <div class="ea-auth-card">
+                    <div class="ea-auth-card-header">
+                        <h4 class="text-white mb-1">Create Your Account</h4>
+                        <p class="text-white small mb-0">Start your cybersecurity journey today — from zero to expert</p>
+                    </div>
+
+                    <!-- Form errors -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger py-2 px-3 mb-3" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:#f87171;">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        {% for field in form %}
+                            {% for error in field.errors %}{{ error }} {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}{{ error }} {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                        {% endif %}
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="ea-form-group">
+                                    <label>First Name</label>
+                                    <input type="text"
+                                           name="first_name"
+                                           class="form-control ea-input"
+                                           placeholder="Adaeze"
+                                           value="{{ form.first_name.value|default:'' }}"
+                                           autofocus>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="ea-form-group">
+                                    <label>Last Name</label>
+                                    <input type="text"
+                                           name="last_name"
+                                           class="form-control ea-input"
+                                           placeholder="Okonkwo"
+                                           value="{{ form.last_name.value|default:'' }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ea-form-group">
+                            <label>Email Address</label>
+                            <input type="email"
+                                   name="email"
+                                   class="form-control ea-input"
+                                   placeholder="adaeze@example.com"
+                                   value="{{ form.email.value|default:'' }}"
+                                   required>
+                        </div>
+
+                        <div class="ea-form-group">
+                            <label>Password</label>
+                            <div class="ea-input-group">
+                                <input type="password"
+                                       name="password1"
+                                       id="signupPassword1"
+                                       class="form-control ea-input"
+                                       placeholder="Minimum 8 characters"
+                                       required>
+                                <button type="button" class="ea-input-toggle" onclick="togglePassword('signupPassword1', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <small class="text-white mt-1 d-block" style="font-size:0.72rem;">Use a mix of letters, numbers & symbols for a strong password</small>
+                        </div>
+
+                        <div class="ea-form-group">
+                            <label>Confirm Password</label>
+                            <div class="ea-input-group">
+                                <input type="password"
+                                       name="password2"
+                                       id="signupPassword2"
+                                       class="form-control ea-input"
+                                       placeholder="Repeat your password"
+                                       required>
+                                <button type="button" class="ea-input-toggle" onclick="togglePassword('signupPassword2', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input ea-checkbox" type="checkbox" id="agreeTerms" required>
+                                <label class="form-check-label text-white small" for="agreeTerms">
+                                    I agree to Eccentric Academy's
+                                    <a href="#" class="text-accent text-decoration-none">Terms of Service</a>
+                                    and
+                                    <a href="#" class="text-accent text-decoration-none">Privacy Policy</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-ea-primary w-100">
+                            <i class="bi bi-rocket-takeoff-fill me-2"></i>Create My Account
+                        </button>
+                    </form>
+
+                    <div class="ea-auth-divider">
+                        <span>Already have an account?</span>
+                    </div>
+
+                    <a href="{% url 'account_login' %}" class="btn btn-outline-accent w-100">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In Instead
+                    </a>
+                </div>
+
+                <div class="text-center mt-3">
+                    <small class="text-white">
+                        <i class="bi bi-shield-lock text-accent me-1"></i>
+                        Your data is safe. We never share your information.
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const icon = btn.querySelector('i');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+    } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+    }
+}
+</script>
+{% endblock %}

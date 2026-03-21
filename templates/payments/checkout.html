@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout – {{ plan.name }} – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-dashboard py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="ea-checkout-card">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <div class="mb-3" style="font-size:3rem;color:var(--ea-accent);">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <h3 class="text-white">Complete Enrollment</h3>
+                        <p class="text-white small">You're one step away from unlocking the {{ plan.name }}</p>
+                    </div>
+
+                    <!-- Plan Summary -->
+                    <div class="p-3 mb-4" style="background:var(--ea-dark-3);border-radius:12px;border:1px solid var(--ea-border);">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white small">Plan</span>
+                            <span class="text-white fw-600">{{ plan.name }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white small">Tier</span>
+                            <span class="text-white">{{ plan.get_tier_display }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white small">Courses Included</span>
+                            <span class="text-white">{{ plan.courses.count }} courses</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white small">Access Type</span>
+                            <span class="text-accent">Lifetime Access</span>
+                        </div>
+                        <hr style="border-color:var(--ea-border);">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-white fw-600">Total (NGN)</span>
+                            <span class="ea-plan-price" style="font-size:1.8rem;">{{ plan.price_formatted }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Security indicators -->
+                    <div class="d-flex justify-content-center gap-4 mb-4">
+                        <div class="text-center">
+                            <i class="bi bi-shield-fill-check text-accent d-block mb-1"></i>
+                            <small class="text-white">Secure</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="bi bi-credit-card-fill text-accent d-block mb-1"></i>
+                            <small class="text-white">Paystack</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="bi bi-lock-fill text-accent d-block mb-1"></i>
+                            <small class="text-white">Encrypted</small>
+                        </div>
+                        <div class="text-center">
+                            <i class="bi bi-patch-check-fill text-accent d-block mb-1"></i>
+                            <small class="text-white">Verified</small>
+                        </div>
+                    </div>
+
+                    <!-- Pay Button -->
+                    <form method="POST" action="{% url 'payments:checkout' plan.slug %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-ea-primary w-100 btn-lg">
+                            <i class="bi bi-lock-fill me-2"></i>
+                            Pay {{ plan.price_formatted }} Securely
+                        </button>
+                    </form>
+
+                    <p class="text-center text-white mt-3 small">
+                        <i class="bi bi-info-circle me-1"></i>
+                        You'll be redirected to Paystack to complete payment. Accepts card, bank transfer & USSD.
+                    </p>
+
+                    <div class="text-center mt-2">
+                        <a href="{% url 'courses:pricing' %}" class="text-white small text-decoration-none">
+                            <i class="bi bi-arrow-left me-1"></i>Back to Plans
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

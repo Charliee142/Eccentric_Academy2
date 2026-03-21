@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard – Eccentric Academy{% endblock %}
+
+{% block content %}
+<div class="ea-dashboard">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-1">Welcome back, <span class="text-accent">{{ user.first_name|default:user.email }}</span></h2>
+                <p class="text-white small mb-0">Here's your learning overview</p>
+            </div>
+            <a href="{% url 'courses:pricing' %}" class="btn btn-ea-primary mt-3 mt-md-0">
+                <i class="bi bi-plus-circle me-2"></i>Upgrade Plan
+            </a>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-lg-3">
+                <div class="ea-stat-box">
+                    <div class="stat-value">{{ enrollments.count }}</div>
+                    <div class="text-white small mt-1">Active Plans</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="ea-stat-box">
+                    <div class="stat-value">{{ accessible_courses.count }}</div>
+                    <div class="text-white small mt-1">Courses Available</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="ea-stat-box">
+                    <div class="stat-value">{{ recent_payments.count }}</div>
+                    <div class="text-white small mt-1">Payments</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="ea-stat-box">
+                    <div class="stat-value text-warning">
+                        {% if enrollments %}
+                            <i class="bi bi-patch-check-fill fs-2"></i>
+                        {% else %}
+                            <i class="bi bi-dash-circle fs-2 text-white"></i>
+                        {% endif %}
+                    </div>
+                    <div class="text-white small mt-1">Status</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+
+                <!-- Active Enrollments -->
+                <div class="mb-4">
+                    <h5 class="text-white mb-3"><i class="bi bi-journal-bookmark-fill text-accent me-2"></i>Your Plans</h5>
+                    {% if enrollments %}
+                        {% for enrollment in enrollments %}
+                        <div class="ea-enrollment-card mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="text-white mb-1">{{ enrollment.plan.name }}</h6>
+                                    <small class="text-white">{{ enrollment.plan.get_tier_display }} Tier · {{ enrollment.plan.courses.count }} courses</small>
+                                </div>
+                                <span class="badge" style="background:rgba(0,229,160,0.15);color:#00e5a0;border:1px solid rgba(0,229,160,0.2);">
+                                    <i class="bi bi-check-circle me-1"></i>Active
+                                </span>
+                            </div>
+                            <div class="mt-3">
+                                <small class="text-white">Enrolled {{ enrollment.enrolled_at|date:"M d, Y" }}</small>
+                            </div>
+                            <div class="mt-3 d-flex gap-2 flex-wrap">
+                                <a href="{% url 'courses:plan_detail' enrollment.plan.slug %}" class="btn btn-outline-accent btn-sm">
+                                    <i class="bi bi-eye me-1"></i>View Courses
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="ea-enrollment-card text-center py-5">
+                            <i class="bi bi-lock-fill fs-1 text-white mb-3 d-block"></i>
+                            <h6 class="text-white">No Active Plans</h6>
+                            <p class="text-white small mb-3">Enroll in a plan to unlock course access</p>
+                            <a href="{% url 'courses:pricing' %}" class="btn btn-ea-primary btn-sm">
+                                <i class="bi bi-rocket-takeoff me-2"></i>Browse Plans
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Accessible Courses -->
+                {% if accessible_courses %}
+                <div class="mb-4">
+                    <h5 class="text-white mb-3"><i class="bi bi-collection-fill text-accent me-2"></i>Your Courses</h5>
+                    <div class="row g-3">
+                        {% for course in accessible_courses|slice:":6" %}
+                        <div class="col-md-6">
+                            <a href="{% url 'courses:course_detail' course.slug %}" class="text-decoration-none">
+                                <div class="ea-course-card">
+                                    <div class="ea-course-thumb" style="height:120px;">
+                                     <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}">
+                                    </div>
+                                    <div class="ea-course-body p-3">
+                                        <div class="ea-course-title" style="font-size:0.9rem;">{{ course.title }}</div>
+                                        <div class="d-flex align-items-center justify-content-between mt-2">
+                                            <span class="badge badge-{{ course.difficulty }}" style="font-size:0.65rem;">
+                                                {{ course.get_difficulty_display }}
+                                            </span>
+                                            <small class="text-white"><i class="bi bi-clock me-1"></i>{{ course.duration_hours }}h</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Profile Card -->
+                <div class="ea-sidebar mb-4">
+                    <div class="text-center pb-3 mb-3" style="border-bottom:1px solid var(--ea-border)">
+                        <div class="mb-3" style="width:64px;height:64px;background:var(--ea-accent-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:1.5rem;color:var(--ea-accent);border:2px solid rgba(0,229,160,0.3);">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h6 class="text-white mb-1">{{ user.get_full_name|default:user.username }}</h6>
+                        <small class="text-white">{{ user.email }}</small>
+                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="{% url 'payments:history' %}" class="btn btn-outline-accent btn-sm w-100">
+                            <i class="bi bi-receipt me-2"></i>Payment History
+                        </a>
+                        <a href="{% url 'account_change_password' %}" class="btn btn-outline-accent btn-sm w-100">
+                            <i class="bi bi-key me-2"></i>Change Password
+                        </a>
+                        <a href="{% url 'account_logout' %}" class="btn btn-sm w-100 text-danger" style="border:1px solid rgba(239,68,68,0.3);">
+                            <i class="bi bi-box-arrow-right me-2"></i>Logout
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Payments -->
+                <div class="ea-sidebar">
+                    <h6 class="text-white mb-3"><i class="bi bi-receipt text-accent me-2"></i>Recent Payments</h6>
+                    {% if recent_payments %}
+                        {% for payment in recent_payments %}
+                        <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px solid var(--ea-border);">
+                            <div>
+                                <small class="text-white d-block">{{ payment.plan.name }}</small>
+                                <small class="text-white">{{ payment.created_at|date:"M d, Y" }}</small>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-accent d-block fw-600">{{ payment.amount_formatted }}</small>
+                                <span class="badge badge-{{ payment.status }}" style="font-size:0.6rem;{% if payment.status == 'success' %}background:rgba(34,197,94,0.15);color:#4ade80;{% elif payment.status == 'pending' %}background:rgba(234,179,8,0.15);color:#fbbf24;{% else %}background:rgba(239,68,68,0.15);color:#f87171;{% endif %}">
+                                    {{ payment.get_status_display }}
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-white small text-center py-3">No payments yet</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
